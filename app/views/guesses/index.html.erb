@@ -1,0 +1,10 @@
+<%= form_tag import_guesses_path, multipart: true do %>
+  <div class="form-group"><%= file_field_tag :file , class: "form-control"%></div>
+
+  <div class="form-group"><label><%= radio_button_tag :time, "1" %>日足</label>
+    <label><%= radio_button_tag :time, "2" %>4時間足</label>
+    <label><%= radio_button_tag :time, "3" %>1時間足</label></div>
+  <p>＊CSVファイルのみ対応可能です</p>
+  <p>＊時間足を指定してください</p>
+  <%= submit_tag "インポート", class: "btn btn-primary" %>
+<% end %>
