@@ -14,6 +14,8 @@ class GuessesController < ApplicationController
       time = 2
     elsif params[:time] == "3"
       time = 3
+    elsif params[:time] == "4"
+      time = 4
     else
       redirect_to root_path
     end
@@ -21,11 +23,19 @@ class GuessesController < ApplicationController
 
     data_2 = []
     csv_data.each do |data|
-      if data[time] =~ /^[0-9]+$/
 
-        data_2 << {name: data[0], price: data[time]}
+      if time == 4
+        data.each do |d|
+          if d[1] =~ /^[0-9]+$/
+            data_2 << {name: "#{data[0]}(#{d[0]})" , price: d[1]}
+          end
+        end
+      else
+        if data[time] =~ /^[0-9]+$/
+
+          data_2 << {name: data[0], price: data[time]}
+        end
       end
-
     end
 
     result = data_2.each_with_object({}) do |x, o|

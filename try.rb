@@ -13,18 +13,23 @@ data = [{name: "apple", price: 200}, {name: "banana", price: 300}, {name: "orang
 #
 # p result
 
-p data.group_by{|item| item[:price]}
-
 csv_data = CSV.read('guess_sheet.csv', headers: true)
 
 data_2 = []
 csv_data.each do |data|
-  if data[1] =~ /^[0-9]+$/
+  p data
+  data.each do |d|
+    p d[1]
+    if d[1] =~ /^[0-9]+$/
 
-  data_2 << { name: data[0], price: data[1] }
+      data_2 << {name: "#{data[0]}(#{d[0]})", price: d[1]}
+    end
+
+
   end
 
 end
+
 
 result = data_2.each_with_object({}) do |x, o|
   price = x[:price]
@@ -37,10 +42,10 @@ end.values
 
 p result
 
-code = ""
-
-result.each do |data|
-  code << data[:name]
-end
-
-p code
+# code = ""
+#
+# result.each do |data|
+#   code << data[:name]
+# end
+#
+# p code
