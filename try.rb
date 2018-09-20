@@ -22,7 +22,8 @@ csv_data.each do |data|
     p d[1]
     if d[1] =~ /^[0-9]+$/
 
-      data_2 << {name: "#{data[0]}(#{d[0]})", price: d[1]}
+      data_2 << {name: "#{data[0]}(#{d[0]})", price: d[1], time: d[0]}
+
     end
 
 
@@ -35,6 +36,9 @@ result = data_2.each_with_object({}) do |x, o|
   price = x[:price]
   if o[price]
     o[price][:name] << ",#{x[:name]}"
+    if o[price][:time] != x[:time]
+      o[price][:time] = "mix"
+    end
   else
     o[price] = x
   end
